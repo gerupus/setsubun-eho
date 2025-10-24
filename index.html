@@ -6,123 +6,139 @@
     <title>今年の節分と恵方</title>
     <style>
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html, body {
             margin: 0 !important;
             padding: 0 !important;
-            height: 100%;
-            overflow: hidden;
-            font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif;
-            background: transparent;
+            box-sizing: border-box !important;
+        }
+        
+        html {
+            width: 100% !important;
+            min-width: 100% !important;
+            height: 140px !important;
+            overflow: hidden !important;
+        }
+        
+        body {
+            width: 100% !important;
+            min-width: 100% !important;
+            height: 140px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif !important;
+            background: transparent !important;
         }
         
         .container {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 12px;
-            padding: 20px;
-            width: 100%;
-            height: 100%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            border-radius: 12px !important;
+            padding: 18px !important;
+            width: 100% !important;
+            min-width: 100% !important;
+            height: 140px !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+            position: relative !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
         }
         
         h1 {
-            font-size: 1.2em;
-            color: white;
-            margin-bottom: 15px;
-            text-align: center;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            font-size: 1.1em !important;
+            color: white !important;
+            margin-bottom: 12px !important;
+            text-align: center !important;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+            line-height: 1.3 !important;
         }
         
         .info-wrapper {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            align-items: stretch;
+            display: flex !important;
+            gap: 12px !important;
+            justify-content: center !important;
+            align-items: stretch !important;
+            flex-wrap: nowrap !important;
         }
         
         .info-card {
-            flex: 1;
-            max-width: 180px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            flex: 1 !important;
+            max-width: 48% !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-radius: 10px !important;
+            padding: 12px !important;
+            text-align: center !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
         }
         
         .label {
-            font-size: 0.75em;
-            color: #666;
-            margin-bottom: 5px;
-            font-weight: 500;
+            font-size: 0.7em !important;
+            color: #666 !important;
+            margin-bottom: 4px !important;
+            font-weight: 500 !important;
+            line-height: 1.2 !important;
         }
         
         .value {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #333;
+            font-size: 1.2em !important;
+            font-weight: bold !important;
+            color: #333 !important;
+            line-height: 1.3 !important;
         }
         
         .compass {
-            font-size: 1.8em;
-            margin: 5px 0;
+            font-size: 1.6em !important;
+            margin: 3px 0 !important;
+            line-height: 1 !important;
         }
         
         .direction-name {
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #333;
-            margin-top: 3px;
+            font-size: 1em !important;
+            font-weight: bold !important;
+            color: #333 !important;
+            margin-top: 2px !important;
+            line-height: 1.2 !important;
         }
         
         .disclaimer {
-            position: absolute;
-            bottom: 5px;
-            left: 8px;
-            font-size: 0.65em;
-            color: rgba(255, 255, 255, 0.7);
-            font-style: italic;
+            position: absolute !important;
+            bottom: 4px !important;
+            left: 8px !important;
+            font-size: 0.6em !important;
+            color: rgba(255, 255, 255, 0.7) !important;
+            font-style: italic !important;
+            line-height: 1 !important;
         }
         
         @media (max-width: 400px) {
             .container {
-                padding: 15px;
+                padding: 15px !important;
             }
             
             h1 {
-                font-size: 1em;
-                margin-bottom: 12px;
+                font-size: 1em !important;
+                margin-bottom: 10px !important;
             }
             
             .info-wrapper {
-                gap: 8px;
+                gap: 10px !important;
             }
             
             .info-card {
-                padding: 12px;
-                max-width: 150px;
+                padding: 10px !important;
             }
             
             .value {
-                font-size: 1.1em;
+                font-size: 1.1em !important;
             }
             
             .compass {
-                font-size: 1.5em;
+                font-size: 1.4em !important;
             }
             
             .direction-name {
-                font-size: 0.95em;
+                font-size: 0.9em !important;
             }
         }
     </style>
@@ -148,7 +164,6 @@
     </div>
 
     <script>
-        // 節分の日を計算（立春の前日）
         function calculateSetsubun(year) {
             const setsubunDates = {
                 2024: 3, 2025: 2, 2026: 3, 2027: 3, 2028: 3, 2029: 2,
@@ -160,7 +175,6 @@
             return new Date(year, 1, day);
         }
         
-        // 恵方を計算
         function calculateEho(year) {
             const directions = [
                 { name: '東北東', symbol: '↗️' },
@@ -180,7 +194,6 @@
             return directions[directionIndex];
         }
         
-        // 表示を更新
         function updateDisplay() {
             const now = new Date();
             let targetYear = now.getFullYear();
