@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今年の節分と恵方</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif;
+            background: transparent;
+        }
+        
+        .container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 20px;
+            width: 100%;
+            height: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        h1 {
+            font-size: 1.2em;
+            color: white;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-wrapper {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: stretch;
+        }
+        
+        .info-card {
+            flex: 1;
+            max-width: 180px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .label {
+            font-size: 0.75em;
+            color: #666;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .value {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .compass {
+            font-size: 1.8em;
+            margin: 5px 0;
+        }
+        
+        .direction-name {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+            margin-top: 3px;
+        }
+        
+        .disclaimer {
+            position: absolute;
+            bottom: 5px;
+            left: 8px;
+            font-size: 0.65em;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+        }
+        
+        @media (max-width: 400px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1em;
+                margin-bottom: 12px;
+            }
+            
+            .info-wrapper {
+                gap: 8px;
+            }
+            
+            .info-card {
+                padding: 12px;
+                max-width: 150px;
+            }
+            
+            .value {
+                font-size: 1.1em;
+            }
+            
+            .compass {
+                font-size: 1.5em;
+            }
+            
+            .direction-name {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌸 今年の節分と恵方 🌸</h1>
+        
+        <div class="info-wrapper">
+            <div class="info-card">
+                <div class="label">節分の日</div>
+                <div class="value" id="setsubunDate">-</div>
+            </div>
+            
+            <div class="info-card">
+                <div class="label">恵方</div>
+                <div class="compass" id="directionSymbol">🧭</div>
+                <div class="direction-name" id="ehoDirection">-</div>
+            </div>
+        </div>
+        
+        <div class="disclaimer">※情報に誤りがある可能性があります</div>
+    </div>
+
+    <script>
+        // 節分の日を計算（立春の前日）
+        function calculateSetsubun(year) {
+            const setsubunDates = {
+                2024: 3, 2025: 2, 2026: 3, 2027: 3, 2028: 3, 2029: 2,
+                2030: 3, 2031: 3, 2032: 3, 2033: 2, 2034: 3, 2035: 3,
+                2036: 3, 2037: 2, 2038: 3, 2039: 3, 2040: 3
+            };
+            
+            const day = setsubunDates[year] || 3;
+            return new Date(year, 1, day);
+        }
+        
+        // 恵方を計算
+        function calculateEho(year) {
+            const directions = [
+                { name: '東北東', symbol: '↗️' },
+                { name: '西南西', symbol: '↙️' },
+                { name: '南南東', symbol: '↘️' },
+                { name: '北北西', symbol: '↖️' }
+            ];
+            
+            const lastDigit = year % 10;
+            let directionIndex;
+            
+            if (lastDigit === 4 || lastDigit === 9) directionIndex = 0;
+            else if (lastDigit === 0 || lastDigit === 5) directionIndex = 1;
+            else if (lastDigit === 1 || lastDigit === 3 || lastDigit === 6 || lastDigit === 8) directionIndex = 2;
+            else directionIndex = 3;
+            
+            return directions[directionIndex];
+        }
+        
+        // 表示を更新
+        function updateDisplay() {
+            const now = new Date();
+            let targetYear = now.getFullYear();
+            
+            const setsubunThisYear = calculateSetsubun(targetYear);
+            
+            if (now > setsubunThisYear) {
+                targetYear += 1;
+            }
+            
+            const setsubun = calculateSetsubun(targetYear);
+            const setsubunMonth = setsubun.getMonth() + 1;
+            const setsubunDay = setsubun.getDate();
+            const eho = calculateEho(targetYear);
+            
+            document.getElementById('setsubunDate').textContent = 
+                `${targetYear}年${setsubunMonth}月${setsubunDay}日`;
+            document.getElementById('directionSymbol').textContent = eho.symbol;
+            document.getElementById('ehoDirection').textContent = eho.name;
+        }
+        
+        updateDisplay();
+        setInterval(updateDisplay, 3600000);
+    </script>
+</body>
+</html>
